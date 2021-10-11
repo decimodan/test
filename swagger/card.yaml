@@ -1,0 +1,145 @@
+swagger: "2.0"
+info:
+  description: "Microservicio de tarjetas."
+  version: "1.0.0"
+  title: "Microservicio Tarjetas"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "apiteam@swagger.io"
+host: "localhost:8080"
+basePath: "/"
+tags:
+- name: "card"
+  description: "Operaciones sobre tarjetas"
+schemes:
+- "https"
+- "http"
+paths:
+  /test/savecard:
+    post:
+      tags:
+      - "card"
+      summary: "Guarda una nueva tarjeta"
+      description: ""
+      operationId: "saveCard"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Agrega una nueva tarjeta a la DB"
+        required: true
+        schema:
+          $ref: "#/definitions/Card"
+      responses:
+        "200":
+          schema:
+            $ref: "#/definitions/Response"
+          description: "200.Banamex.001200"
+        "400":
+          schema:
+            $ref: "#/definitions/Error400"
+          description: "400.Banamex.001400"
+        "500":
+          schema:
+            $ref: "#/definitions/Error500"
+          description: "500.Banamex.000500"
+  /id:
+    post:
+      tags:
+      - "card"
+      summary: "Consultar una tarjeta"
+      description: ""
+      operationId: "searchCard"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Consulta una tarjeta a la DB"
+        required: true
+        schema:
+          $ref: "#/definitions/Id"
+      responses:
+        "200":
+          schema:
+            $ref: "#/definitions/Response"
+          description: "200.Banamex.001200"
+        "400":
+          schema:
+            $ref: "#/definitions/Error400"
+          description: "400.Banamex.001400"
+        "500":
+          schema:
+            $ref: "#/definitions/Error500"
+          description: "500.Banamex.000500"
+definitions:
+  Card:
+    type: "object"
+    properties:
+      modelo: 
+        type : "string"
+      color:
+        type : "string"
+      marca:
+        type : "string"
+  Id:
+    type : "object"
+    properties:
+      id:
+        type : "string"
+  Response:
+    type: "object"
+    properties:
+      codigo: 
+        type : "string"
+        example : "200.Banamex.001200"
+      mensaje:
+        type : "string"
+        example : "Proceso terminado correctamente."
+      folio:
+        type : "string"
+        example : "000-202110111742000700"
+      resultado:
+        type : "string"
+        example : "resultado"
+  Error400:
+    type: "object"
+    properties:
+      codigo: 
+        type : "string"
+        example : "200.Banamex.001200"
+      mensaje:
+        type : "string"
+        example : "Proceso terminado correctamente."
+      folio:
+        type : "string"
+        example : "000-202110111742000700"
+      info:
+        type : "string"
+        example : "https://banamex.com/errores#400.Banamex.000400"
+      detalles:
+        type : "string"
+        example : "detalles"
+  Error500:
+    type: "object"
+    properties:
+      codigo: 
+        type : "string"
+        example : "200.Banamex.001200"
+      mensaje:
+        type : "string"
+        example : "Proceso terminado correctamente."
+      folio:
+        type : "string"
+        example : "000-202110111742000700"
+      info:
+        type : "string"
+        example : "https://banamex.com/errores#500.Banamex.000500"
+      detalles:
+        type : "string"
+        example : "detalles"
